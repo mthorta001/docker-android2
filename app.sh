@@ -39,11 +39,11 @@ TAG_NAME=""
 if [[ "${p}" == "pro"* ]]; then
     IFS='-' read -ra arr <<<"${p}"
     FOLDER_PATH+="docker/${arr[0]}/${arr[1]}"
-    IMAGE_NAME+="budtmo2/docker-android-${arr[0]}"
+    IMAGE_NAME+="rcswain/docker-android-${arr[0]}"
     TAG_NAME+="${arr[1]}"
 else
     FOLDER_PATH+="docker/${p}"
-    IMAGE_NAME+="budtmo/docker-android"
+    IMAGE_NAME+="rcswain/docker-android"
     TAG_NAME+="${p}"
 fi
 
