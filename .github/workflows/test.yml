@@ -16,10 +16,10 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build base image
-      run: script -e -c "./app.sh build base test"
+      run: script -e -c "./app.py build base test"
 
     - name: Build emulator image and run unit-test
-      run: script -e -c "./app.sh test emulator test 11.0 && sudo mv tmp/* ."
+      run: script -e -c "./app.py test emulator test 11.0 && sudo mv tmp/* ."
 
     - name: Publish test result
       run: bash <(curl -s https://codecov.io/bash)

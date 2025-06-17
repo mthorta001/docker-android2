@@ -43,7 +43,7 @@ jobs:
     - name: Build and push base image (${RELEASE_VERSION})
       run: |
         docker login -u=${{secrets.DOCKER_USERNAME}} -p=${{secrets.DOCKER_PASSWORD}}
-        ./app.sh push base ${RELEASE_VERSION}
+        ./app.py push base ${RELEASE_VERSION}
         docker logout
 
   release_emulator:
@@ -51,7 +51,7 @@ jobs:
     needs: release_base
     strategy:
       matrix:
-        android: ["9.0", "10.0", "11.0", "12.0", "13.0", "14.0"]
+        android: ["15.0", "16.0"]
     steps:
     - name: Checkout the repo
       uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
     - name: Build and push emulator image ${{ matrix.android }} (${RELEASE_VERSION})
       run: |
         docker login -u=${{secrets.DOCKER_USERNAME}} -p=${{secrets.DOCKER_PASSWORD}}
-        ./app.sh push emulator ${RELEASE_VERSION} ${{ matrix.android }}
+        ./app.py push emulator ${RELEASE_VERSION} ${{ matrix.android }}
         docker logout
 
   release_genymotion:
@@ -78,5 +78,5 @@ jobs:
     - name: Build and push genymotion image (${RELEASE_VERSION})
       run: |
         docker login -u=${{secrets.DOCKER_USERNAME}} -p=${{secrets.DOCKER_PASSWORD}}
-        ./app.sh push genymotion ${RELEASE_VERSION}
+        ./app.py push genymotion ${RELEASE_VERSION}
         docker logout
